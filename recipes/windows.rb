@@ -13,5 +13,5 @@ node.default['java']['home'] = 'C:\Program Files\Java\jdk1.8.0_171'
 jenkins_windows_slave 'mywinslave' do
   remote_fs 'C:/Windows/Temp'
   user       '.\Administrator'
-  password   ')6xEXgq3c78'
+  password   'Generate your password'
 end
