@@ -15,12 +15,38 @@ verifier:
 
 platforms:
   - name: centos-7.3
+  - name: eval-win2012r2-standard
+    os_type: windows
+    driver: 
+      image_id: ami-ee112c8b
+    transport:
+      name: winrm
+      elevated: true
 
 suites:
-  - name: default
+  - name: master
     run_list:
       - recipe[ChefRally_Jenkins_Master::default]
     verifier:
       inspec_tests:
         - test/smoke/default
     attributes:
+    excludes: eval-win2012r2-standard
+  - name: slave1
+    run_list:
+      - recipe[ChefRally_Jenkins_Master::slave]
+    verifier:
+      inspec_tests:
+        - test/smoke/default
+    attributes:
+    excludes: eval-win2012r2-standard
+  - name: windows
+    run_list:
+      - recipe[ChefRally_Jenkins_Master::windows]
+    verifier:
+      inspec_tests:
+        - test/smoke/default
+    attributes:
+    excludes: centos-7.3
+
+
